@@ -1,0 +1,14 @@
+customer_register<br>
+<div>
+{{ error }}
+</div>
+<form method="post" action="{% url 'accounts:customer_register' %}">
+    {% csrf_token %}
+    email<input type="email" name="email" value="{{ email }}"><br>
+    username<input type="usernmae" name="username" value="{{ username }}"><br>
+    dob<input type="date" name="date_of_birth" value="{{ date_of_birth }}"><br>
+    password<input type="password" name="password"><br>
+    password conformation<input type="password" name="password2"><br>
+    <input type="submit" value="submit">
+</form>
+

@@ -1,0 +1,10 @@
+seller register<br>
+<form method="post" action="{% url 'accounts:seller_register' %}">
+    {% csrf_token %}
+    email<input type="email" name="email"><br>
+    username<input type="usernmae" name="username"><br>
+    dob<input type="date" name="date_of_birth"><br>
+    password<input type="password" name="password"><br>
+    password conformation<input type="password" name="password2"><br>
+    <input type="submit" value="submit">
+</form>
