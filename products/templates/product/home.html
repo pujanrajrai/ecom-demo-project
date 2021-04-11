@@ -1,0 +1,17 @@
+<h2><a href="{% url 'product:show_product' username %}">Show Product</a> </h2>
+Product
+<form enctype="multipart/form-data" action="" method="post">
+    {% csrf_token %}
+    product_name: <input type="text" name="product_name"><br>
+    price: <input type="number" name="price" min="0"><br>
+    photo: <input type="file" name="photo" accept="image/*"><br>
+    category: <input type="text" name="category"><br>
+    sub category: <input type="text" name="sub_category"><br>
+    brand_name: <input type="text" name="brand_name"><br>
+    description: <input type="text" name="description"><br>
+    stock: <input type="number" name="stock" min="0"><br>
+    <input type="submit" value="save and continue" name="continue"><br>
+{#    <input type="submit" value="save and exit" name="exit"><br>#}
+</form>
+
+

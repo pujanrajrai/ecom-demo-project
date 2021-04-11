@@ -1,0 +1,43 @@
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<h2><a href="{% url 'seller_profile:seller_profile_view' %}">Show Seller Profile</a> </h2>
+
+<h2>Shop Profile</h2>
+<h2><a href="{% url 'shop_profile:shop_profile_create' %}">Add Shop</a> </h2>
+
+<table>
+    <tr>
+        <th>Shop Name</th>
+        <th>Shop User Name</th>
+        <th>Shop Category</th>
+        <th>Shop Verification</th>
+        <th>Action</th>
+    </tr>
+    {% for profile in shop_profile %}
+        <tr>
+            <td>{{ profile.shop_name }}</td>
+            <td>{{ profile.shop_user_name }}</td>
+            <td>{{ profile.shop_category }}</td>
+            <td>{{ profile.is_verified }}</td>
+            <td><a href="{% url 'product:show_product' profile.shop_user_name %}">view Shop Details</a> </td>
+
+        </tr>
+
+    {% endfor %}
+
+</table>

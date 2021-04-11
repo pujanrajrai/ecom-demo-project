@@ -10,7 +10,7 @@ from .models import MyUser
 
 def customer_register(request):
     if request.user.is_authenticated:
-        return redirect('accounts:homepage')
+        return redirect('landing_page:landing_page')
     if request.method == 'POST':
         data = request.POST.copy()
         forms = RegisterForm(data)
@@ -26,7 +26,7 @@ def customer_register(request):
             user = auth.authenticate(email=data['email'], password=data['password'])
             if user is not None:
                 auth.login(request, user)
-                return redirect('accounts:homepage')
+                return redirect('landing_page:landing_page')
             return render(request, 'accounts/customer_register.html')
         else:
             print(forms.errors)
@@ -43,7 +43,7 @@ def customer_register(request):
 
 def seller_register(request):
     if request.user.is_authenticated:
-        return redirect('accounts:homepage')
+        return redirect('landing_page:landing_page')
     if request.method == 'POST':
         data = request.POST.copy()
         forms = RegisterForm(data)
@@ -61,18 +61,19 @@ def seller_register(request):
             user = auth.authenticate(email=data['email'], password=data['password'])
             if user is not None:
                 auth.login(request, user)
-                return redirect('accounts:homepage')
-            return render(request, 'accounts/customer_register.html')
+                return redirect('seller_profile:seller_profile_create')
+            return render(request, 'accounts/seller_registration.html')
         else:
-            print(forms.errors)
+            context = {"errors": forms.errors}
+            return render(request, 'accounts/seller_registration.html', context)
 
-    return render(request, 'accounts/customer_register.html')
+    return render(request, 'accounts/seller_registration.html')
 
 
 def login(request):
     form = {}
     if request.user.is_authenticated:
-        return redirect('accounts:homepage')
+        return redirect('landing_page:landing_page')
     else:
         if request.method == 'POST':
             email = request.POST['email']
@@ -80,7 +81,7 @@ def login(request):
             user = auth.authenticate(email=email, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('accounts:homepage')
+                return redirect('landing_page:landing_page')
             else:
                 errors = "User name or password is incorrect"
                 return render(request, 'accounts/login.html', {"errors": errors})
@@ -89,9 +90,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('accounts:login')
-
-
-@login_required
-def homepage(request):
-    return render(request, 'accounts/loggedin.html')
+    return redirect('landing_page:landing_page')

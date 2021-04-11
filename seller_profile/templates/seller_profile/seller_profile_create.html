@@ -1,0 +1,13 @@
+{{ errors }}
+<form enctype="multipart/form-data" method="post" action="{% url 'seller_profile:seller_profile_create' %}">
+    {% csrf_token %}
+    first_name:<input type="text" name="first_name"><br>
+    last_name:<input type="text" name="last_name"><br>
+    mobile_number:<input type="number" minlength="9800000000" maxlength="9999999999" name="mobile_number"><br>
+    citizenship_number:<input type="text" name="citizenship_number"><br>
+    citizenship_front:<input type="file" name="citizenship_front" accept="image/*"><br>
+    citizenship_back:<input type="file" name="citizenship_back" accept="image/*"><br>
+    temp_add:<input type="text" name="temp_add"><br>
+    per_add:<input type="text" name="per_add"><br>
+    <input type="submit">
+</form>

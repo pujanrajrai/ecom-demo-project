@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Product Photo</th>
+        <th>Product Price</th>
+        <th>Action</th>
+    </tr>
+    {% for cart in cart_item %}
+        <tr>
+            <td>{{ cart.products.product_name }}</td>
+            <td><img src="{{ cart.products.photo.url }}" width="200px" height="150px"></td>
+            <td>{{ cart.products.price }}</td>
+            <td>
+                <form method="post" action="{% url 'order:remove_from_cart' cart.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Remove From Cart</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+<h1 align="right">Total:{{ total }}
+    <form method="post" action="{% url 'order:checkout' %}">
+        {% csrf_token %}
+        <button type="submit">Check Out</button>
+    </form>
+</h1>
+
+</body>
+</html>

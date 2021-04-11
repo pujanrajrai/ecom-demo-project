@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align: left"><a href="{% url 'shop_profile:shop_profile_show' %}"> Show Shop Profile</a>
+</h2>
+<h2>HTML Table</h2>
+<h2 style="text-align: right"><a href="{% url 'product:add_product' username %}"> Add Product</a>
+<h2 style="text-align: right"><a href="{% url 'order:shop_order_details' username %}"> Show Order Details</a>
+</h2>
+
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Image</th>
+    </tr>
+    {% for product in products %}
+        <tr>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.price }}</td>
+            <td><img src="{{ product.photo.url }}" style="object-fit: cover" width="200" height="100"></td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

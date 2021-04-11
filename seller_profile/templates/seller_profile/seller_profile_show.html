@@ -1,0 +1,19 @@
+<h1>Your Profile</h1>
+{% for pro in profile %}
+    first name: {{ pro.first_name }} <br>
+    email: {{ request.user }} <br>
+    last name: {{ pro.last_name }}<br>
+    mobile number: {{ pro.mobile_number }}<br>
+    citizenship number: {{ pro.citizenship_number }}<br>
+    citizenship front:<br>
+    <img src="{{ pro.citizenship_front.url }}" height="200" width="400"><br>
+    citizenship back:<br>
+    <img src="{{ pro.citizenship_back.url }}" height="200" width="400"><br>
+    Temporary Address: {{ pro.temp_add }}<br>
+    Permanent Address: {{ pro.per_add }} <br>
+    {% if pro.is_verified %}
+        Your Profile is verified
+    {% else %}
+        Your profile is not verified
+    {% endif %}
+{% endfor %}

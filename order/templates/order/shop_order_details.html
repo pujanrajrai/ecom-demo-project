@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2>My Order Details</h2>
+
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Product Photo</th>
+        <th>Product Price</th>
+        <th>Status</th>
+    </tr>
+    {% for o in order %}
+        <tr>
+            <td>{{ o.products.product_name }}</td>
+            <td><img src="{{ o.products.photo.url }}" width="200px" height="150px"></td>
+            <td>{{ o.products.price }}</td>
+            <td>
+                {% if o.is_delivered %}
+                    Delivered
+                {% elif o.is_send and not o.is_delivered %}
+                    <form method="post" action="{% url 'order:is_delivered' o.id username %}">
+                    {% csrf_token %}
+                        <input type="submit" value="Deliver item">
+                    </form>
+                {% else %}
+                    Item in review<br>
+                    <form method="post" action="{% url 'order:is_send' o.id username %}">
+                    {% csrf_token %}
+                        <input type="submit" value="send item">
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{#<h1 align="right">Total:{{ total }}#}
+{#    <form method="post" action="{% url 'order:checkout' %}">#}
+{#        {% csrf_token %}#}
+{#        <button type="submit">Check Out</button>#}
+{#    </form>#}
+{#</h1>#}
+
+</body>
+</html>
