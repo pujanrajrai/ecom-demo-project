@@ -11,5 +11,5 @@ urlpatterns = [
                   path('seller/profile/', include('seller_profile.urls')),
                   path('seller/shop/profile/', include('shop_profile.urls')),
                   path('product/', include('products.urls')),
-                  # path('messages/', include('messages.urls'))
+                  path('chat/', include('chat.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

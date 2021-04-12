@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'products',
     'landing_page',
     'order',
-    # 'messages',
+    'chat',
 ]
 
 MIDDLEWARE = [

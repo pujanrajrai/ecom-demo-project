@@ -20,7 +20,7 @@ def product_create(request, username):
         forms = ProductsForm(request.POST, request.FILES)
         if forms.is_valid():
             product = Products(
-                shop_product=ShopProfile.objects.get(shop_user_name=username),
+                shop_product=ShopProfile.objects.filter(shop_user_name=username),
                 owner=request.user,
                 product_name=request.POST.get('product_name'),
                 price=request.POST.get('price'),
