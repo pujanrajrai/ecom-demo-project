@@ -1,43 +1,60 @@
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
+{% extends 'dashboard/base.html' %}
+{% block body %}
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800" style="text-align: right">
+                    <a href="{% url 'shop_profile:shop_profile_create' %}" class="btn btn-success mb-2">Add Shop</a>
+                </h1>
 
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-<h2><a href="{% url 'seller_profile:seller_profile_view' %}">Show Seller Profile</a> </h2>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Shop Profile</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Shop Name</th>
+                                    <th>Shop User Name</th>
+                                    <th>Shop Category</th>
+                                    <th>Shop Verification</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
 
-<h2>Shop Profile</h2>
-<h2><a href="{% url 'shop_profile:shop_profile_create' %}">Add Shop</a> </h2>
+                                <tr>
+                                    <th>Shop Name</th>
+                                    <th>Shop User Name</th>
+                                    <th>Shop Category</th>
+                                    <th>Shop Verification</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                {% for profile in shop_profile %}
+                                    <tr>
+                                        <td>{{ profile.shop_name }}</td>
+                                        <td>{{ profile.shop_user_name }}</td>
+                                        <td>{{ profile.shop_category }}</td>
+                                        <td>{{ profile.is_verified }}</td>
+                                        <td><a href="{% url 'product:show_product' profile.shop_user_name %}">view Shop
+                                            Details</a></td>
+                                    </tr>
+                                {% endfor %}
 
-<table>
-    <tr>
-        <th>Shop Name</th>
-        <th>Shop User Name</th>
-        <th>Shop Category</th>
-        <th>Shop Verification</th>
-        <th>Action</th>
-    </tr>
-    {% for profile in shop_profile %}
-        <tr>
-            <td>{{ profile.shop_name }}</td>
-            <td>{{ profile.shop_user_name }}</td>
-            <td>{{ profile.shop_category }}</td>
-            <td>{{ profile.is_verified }}</td>
-            <td><a href="{% url 'product:show_product' profile.shop_user_name %}">view Shop Details</a> </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-        </tr>
+            </div>
+            <!-- /.container-fluid -->
 
-    {% endfor %}
 
-</table>
+{% endblock %}

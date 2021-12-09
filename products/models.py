@@ -23,3 +23,4 @@ class Products(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.product_name + "-" + str(self.id))
         super(Products, self).save(*args, **kwargs)
+

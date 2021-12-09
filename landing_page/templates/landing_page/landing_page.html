@@ -1,63 +1,34 @@
+{% extends 'landing_page/base.html' %}
+{% block title %}
+Saman Cha
+{% endblock %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">SamanCha</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                {#                <a class="nav-link" href="#">nothing <span class="sr-only">(current)</span></a>#}
-            </li>
-
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        &nbsp;&nbsp;&nbsp;
-        {% if user.is_authenticated %}
-
-            <a href="{% url 'shop_profile:shop_profile_show' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Shop Profile</a>
-            <a href="{% url 'accounts:logout' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</a>
-
-        {% else %}
-            &nbsp;&nbsp;&nbsp;
-            <a href="{% url 'accounts:login' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="{% url 'accounts:customer_register' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Customer
-                Register</a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="{% url 'accounts:seller_register' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Seller
-                Register</a>
-
-        {% endif %}
-
-    </div>
-</nav>
-
-<div class=" container-fluid mt-5 mb-5">
-    <a href="{% url 'order:view_cart' %}" class="btn btn-outline-success my-2 my-sm-0">View cart</a>
-    <h2 class="mb-5" style="text-align: center; border-bottom: 2px solid black;">Products</h2>
-    <div class="row">
-        {% for product in products %}
-            <div class="card ml-5 mb-5" style="width: 18rem;    box-shadow: 10px 10px 5px grey;">
-                {#                <a href="{% url 'ecom:product' product.slug|slugify %}">#}
-                <img class="card-img-top image-resize2"
-                     src="{{ product.photo.url }}"
-                     alt="Card image cap" style="height: 200px; object-fit: cover">
-                </a>
-                <div class="card-body">
-                    {#                    <a href="{% url 'ecom:product' product.slug|slugify %}" style="color: black">#}
-                    {#                        <h4 class="card-title">{{ product.name }}</h4>#}
-                    {#                    </a>#}
-                    <h5 class="card-title">{{ product.product_name }}</h5>
-                    <h5 class="card-title">RS.{{ product.price }}</h5>
-                    <a href="{% url 'order:add_to_cart' product.slug|slugify %}" class="btn btn-success">Add to card</a>
+{% block body %}
+    <div class=" container-fluid mt-3 mb-2">
+        <div style="text-align: right">
+            <a href="{% url 'order:view_cart' %}" class="btn btn-outline-success my-2 my-sm-0 ">View
+                cart</a>
+        </div>
+        <h2 class="mb-5" style="text-align: center; border-bottom: 2px solid #4FA846;">Products</h2>
+        <div class="row">
+            {% for product in products %}
+                <div class="card ml-5 mb-5" style="width: 18rem;    box-shadow: 10px 10px 5px grey;">
+                    {#                <a href="{% url 'ecom:product' product.slug|slugify %}">#}
+                    <img class="card-img-top image-resize2"
+                         src="{{ product.photo.url }}"
+                         alt="Card image cap" style="height: 200px; object-fit: cover">
+                    </a>
+                    <div class="card-body">
+                        {#                    <a href="{% url 'ecom:product' product.slug|slugify %}" style="color: black">#}
+                        {#                        <h4 class="card-title">{{ product.name }}</h4>#}
+                        {#                    </a>#}
+                        <h5 class="card-title">{{ product.product_name }}</h5>
+                        <h5 class="card-title">RS.{{ product.price }}</h5>
+                        <a href="{% url 'order:add_to_cart' product.slug|slugify %}" class="btn btn-success">Add to
+                            card</a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+{% endblock %}

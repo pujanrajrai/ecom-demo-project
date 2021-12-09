@@ -1,20 +1,26 @@
-<div>
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+<div class="container">
     {{ error }}
     <form enctype="multipart/form-data" method="post" action="{% url 'shop_profile:shop_profile_create' %}">
         {% csrf_token %}
-        Shop registered name: <input type="text" name="shop_registered_name"><br>
-        shop_name: <input type="text" name="shop_name"><br>
-        shop_user_name: <input type="text" name="shop_user_name"><br>
-        shop_owner_name: <input type="text" name="shop_owner_name"><br>
-        shop_address: <input type="text" name="shop_address"><br>
-        shop_warehouse_address: <input type="text" name="shop_warehouse_address"><br>
-        shop_returned_address: <input type="text" name="shop_returned_address"><br>
-        shop_category: <input type="text" name="shop_category"><br>
-        shop_detail_description: <input type="text" name="shop_detail_description"><br>
-        shop_pan_card: <input type="file" name="shop_pan_card" accept="image/*"><br>
-        shop_phone_number: <input type="number" name="shop_phone_number"><br>
-        shop_owner_phone_number: <input type="number" name="shop_owner_phone_number"><br>
-        <input type="submit" value="submit">
+        Shop registered name: <br><input type="text" name="shop_registered_name"><br>
+        shop_name: <br><input type="text" name="shop_name"><br>
+        shop_user_name:<br> <input type="text" name="shop_user_name"><br>
+        shop_owner_name: <br><input type="text" name="shop_owner_name"><br>
+        shop_address:<br> <input type="text" name="shop_address"><br>
+        shop_warehouse_address:<br> <input type="text" name="shop_warehouse_address"><br>
+        shop_returned_address:<br> <input type="text" name="shop_returned_address"><br>
+        shop_category: <br><input type="text" name="shop_category"><br>
+        shop_detail_description:<br> <input type="text" name="shop_detail_description"><br>
+        shop_pan_card: <br><input type="file" name="shop_pan_card" accept="image/*"><br>
+        shop_phone_number:<br> <input type="number" name="shop_phone_number"><br>
+        shop_owner_phone_number: <br><input type="number" name="shop_owner_phone_number"><br><br>
+        <input type="submit" value="submit" class="btn btn-success">
     </form>
 
 </div>
+
+
+{% endblock %}

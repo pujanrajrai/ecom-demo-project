@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.shortcuts import render, redirect, HttpResponse
 from products.models import Products
 from shop_profile.models import ShopProfile
@@ -84,3 +85,5 @@ def is_delivered(request, id, username):
     if request.method == 'POST':
         Order.objects.filter(id=id).update(is_delivered=True)
         return HttpResponseRedirect(f'/order/shop_order_details/{username}')
+
+

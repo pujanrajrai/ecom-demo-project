@@ -1,20 +1,86 @@
-create message
+{% extends 'dashboard/base.html' %}
+{% block body %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid row">
 
-<br>
-{% for chat in chats %}
-    {% if chat.message %}
-        {{ chat.send_from }}        &nbsp;&nbsp;&nbsp;
+        <div class="card shadow mb-4 col-2">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Messages</h6>
 
-        {{ chat.send_to }}
-        <br>
-        {{ chat.message }}
-    {% endif %}<br>
-    {% if chat.image %}{{ chat.image }}{% endif %}<br>
-{% endfor %}
+                {% for messages in all_messages %}
+                    <div class="alert alert-secondary">
+                        {{ messages.send_from }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card shadow mb-4 ml-3 col-9">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ username }}</h6>
+            </div>
 
-<form enctype="multipart/form-data" action="" method="post">
-    {% csrf_token %}
-    <input type="text" name="message"><br>
-    <input type="file" name="images" accept="image/*"><br>
-    <input type="submit" value="submit">
-</form>
+            <div class="container mt-2">
+
+                <div class="row">
+                    {% for chat in chats %}
+                        {% if chat.message %}
+                            {% if request.user == chat.send_from %}
+                                <div class="col-6" style="text-align: right">
+
+                                </div>
+                                <div class="col-6 alert alert-success" style="text-align: right">
+                                    <p class="alert alert-dark">{{ chat.send_from }}</p>
+                                    <p>{{ chat.message }}</p>
+                                    {% if chat.image != 'False' %}
+                                    <img src="{{ chat.image.url }}" width="400" height="200">
+                                    {% endif %}
+                                </div>
+
+                            {% else %}
+                                <div class="col-6 alert alert-primary" style="text-align: left">
+                                    <div class="alert alert-dark">{{ chat.send_from }}</div>
+
+                                    <p>{{ chat.message }}</p>
+
+                                </div>
+                                <div class="col-6 " style="text-align: left">
+
+                                </div>
+
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="container">
+                <form enctype="multipart/form-data" action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="images">Select Images</label>
+                                <input type="file" class="filestyle" name="images" id="images" data-input="false"
+                                       data-iconName="fa fa-upload" data-buttonText="Upload File"/>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group">
+                                <label for="message">Messages</label>
+                                <input type="text" class="form-control" id="message" aria-describedby="message"
+                                       placeholder="Enter message" name="message">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="send">.</label>
+                                <input type="submit" class="form-control" id="send" value="send">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

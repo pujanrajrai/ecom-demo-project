@@ -1,17 +1,50 @@
-<h2><a href="{% url 'product:show_product' username %}">Show Product</a> </h2>
+{% extends 'dashboard/base.html' %}
+{% block body %}
+
+    {#    <h2 style="text-align: left">#}
+    {#    </h2>#}
+    {#    <h2 style="text-align: right"><a href="{% url 'product:add_product' username %}"> Add Product</a>#}
+    <h2 style="text-align: right">
+    </h2>
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: right">
+            <a href="{% url 'product:show_product' username %}" class="btn btn-success"> Show Product</a>
+            {#            <a href="{% url 'shop_profile:shop_profile_show' %}" class="btn btn-warning"> Show Shop Profile</a>#}
+        </h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Create Product</h6>
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" action="" method="post">
+                    {% csrf_token %}
+                    product_name:<br> <input type="text" name="product_name"><br>
+                    price:<br> <input type="number" name="price" min="0"><br>
+                    photo:<br> <input type="file" name="photo" accept="image/*"><br>
+                    category:<br> <input type="text" name="category"><br>
+                    sub category:<br> <input type="text" name="sub_category"><br>
+                    brand_name:<br> <input type="text" name="brand_name"><br>
+                    description:<br> <input type="text" name="description"><br>
+                    stock:<br> <input type="number" name="stock" min="0"><br><br>
+                    <input type="submit" value="save and continue" name="continue"><br>
+                    {#    <input type="submit" value="save and exit" name="exit"><br>#}
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
 Product
-<form enctype="multipart/form-data" action="" method="post">
-    {% csrf_token %}
-    product_name: <input type="text" name="product_name"><br>
-    price: <input type="number" name="price" min="0"><br>
-    photo: <input type="file" name="photo" accept="image/*"><br>
-    category: <input type="text" name="category"><br>
-    sub category: <input type="text" name="sub_category"><br>
-    brand_name: <input type="text" name="brand_name"><br>
-    description: <input type="text" name="description"><br>
-    stock: <input type="number" name="stock" min="0"><br>
-    <input type="submit" value="save and continue" name="continue"><br>
-{#    <input type="submit" value="save and exit" name="exit"><br>#}
-</form>
+
 
 

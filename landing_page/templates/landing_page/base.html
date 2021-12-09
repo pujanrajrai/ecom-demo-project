@@ -1,0 +1,259 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <style>
+        {% block style %}{% endblock %}
+    </style>
+    <style>
+        .search {
+            margin-right: 250px;
+        }
+
+        .search_bar {
+            width: 400px;
+        }
+
+        footer {
+            background-color: #0F0F0F;
+            height: 334px;
+            text-align: center;
+            color: white;
+        }
+
+        a {
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{% static '1.png' %}" style="height:55px;width:200px;object-fit: cover;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                {#                <a class="nav-link" href="#">nothing <span class="sr-only">(current)</span></a>#}
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0 search" action="{% url 'landing_page:search' %}">
+            <div class="dropdown">
+                <select name="search_type" class="btn btn-outline-success dropdown-toggle">
+                    <option value="product">All Product</option>
+                    <option value="shop">Shop</option>
+                </select>
+            </div>
+            &nbsp;&nbsp;
+            <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search"
+                   style="width: 300px">&nbsp;&nbsp;
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        &nbsp;&nbsp;&nbsp;
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'shop_profile:shop_profile_show' %}" class="btn btn-outline-success my-2 my-sm-0"
+               type="submit">Shop Profile</a>
+            <a href="{% url 'accounts:logout' %}" class="btn btn-outline-success my-2 my-sm-0"
+               type="submit">Logout</a>
+
+        {% else %}
+            &nbsp;&nbsp;&nbsp;
+            <a href="{% url 'accounts:login' %}" class="btn btn-outline-success my-2 my-sm-0"
+               type="submit">Login</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{% url 'accounts:customer_register' %}" class="btn btn-outline-success my-2 my-sm-0"
+               type="submit">Register</a>
+
+        {% endif %}
+
+    </div>
+</nav>
+{% block body %}
+
+{% endblock %}
+
+<!-- Footer -->
+<footer class="page-footer font-small  lighten-3 pt-4">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row" style="background-color: #0F0F0F">
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+
+                <!-- Content -->
+
+                                <img src="{% static '1.png' %}" alt="..." class="img-thumbnail">
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mb-4">Contact Us</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <p>
+                            9808282207
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            samancha@gmail.com
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            kathmandu,Nepal
+                        </p>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mb-4">Our Company</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <p>
+                            <a href="#!">About Us</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="#!">Pricing</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="#!">Stories</a>
+                        </p>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- Grid column --><!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mb-4">Company Policy</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <p>
+                            <a href="#!">Privacy Policy</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="#!">Terms and Conditions</a>
+                        </p>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mb-4">Social Contacts</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <p>
+                            <a href="#!">Facebook</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="#!">Instagram</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="#!">Twitter</a>
+                        </p>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3" style="background-color: #0F0F0F">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> samancha.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+{% block script %}{% endblock %}
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

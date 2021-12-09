@@ -27,19 +27,6 @@ def is_customer():
 
     return decorator
 
-#
-# def is_shop_owner():
-#     def decorator(view_function):
-#         def wrap(request, *args, **kwargs):
-#             # import pdb;pdb.set_trace()
-#             if Products.objects.filter(owner=request.user).exists():
-#                 return view_function(request, *args, **kwargs)
-#             else:
-#                 raise PermissionDenied
-#         return wrap
-#
-#     return decorator
-
 def is_order_owner():
     def decorator(view_function):
         def wrap(request, *args, **kwargs):

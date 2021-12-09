@@ -1,49 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+{% extends 'dashboard/base.html' %}
+{% block body %}
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
+{#    <h2 style="text-align: left">#}
+{#    </h2>#}
+{#    <h2 style="text-align: right"><a href="{% url 'product:add_product' username %}"> Add Product</a>#}
+    <h2 style="text-align: right">
+    </h2>
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-</head>
-<body>
-<h2 style="text-align: left"><a href="{% url 'shop_profile:shop_profile_show' %}"> Show Shop Profile</a>
-</h2>
-<h2>HTML Table</h2>
-<h2 style="text-align: right"><a href="{% url 'product:add_product' username %}"> Add Product</a>
-<h2 style="text-align: right"><a href="{% url 'order:shop_order_details' username %}"> Show Order Details</a>
-</h2>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-<table>
-    <tr>
-        <th>Product Name</th>
-        <th>Stock</th>
-        <th>Price</th>
-        <th>Image</th>
-    </tr>
-    {% for product in products %}
-        <tr>
-            <td>{{ product.product_name }}</td>
-            <td>{{ product.stock }}</td>
-            <td>{{ product.price }}</td>
-            <td><img src="{{ product.photo.url }}" style="object-fit: cover" width="200" height="100"></td>
-        </tr>
-    {% endfor %}
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: right">
+            <a href="{% url 'order:shop_order_details' username %}" class="btn btn-success"> Show Order Details</a>
+{#            <a href="{% url 'shop_profile:shop_profile_show' %}" class="btn btn-warning"> Show Shop Profile</a>#}
+            <a href="{% url 'product:add_product' username %}" class="btn btn-primary"> Add Product</a>
+        </h1>
 
-</table>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Shop Profile</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Image</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
 
-</body>
-</html>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Image</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.product_name }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td>{{ product.price }}</td>
+                                <td><img src="{{ product.photo.url }}" style="object-fit: cover" width="200"
+                                         height="100"></td>
+                            <td><a href="#" class="btn btn-danger">Delete</a> </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

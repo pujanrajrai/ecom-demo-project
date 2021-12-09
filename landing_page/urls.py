@@ -21,5 +21,6 @@ app_name = 'landing_page'
 urlpatterns = [
     path('', views.landing_page, name='landing_page'),
     path('<str:username>/', views.shop_landing_page, name='shop_landing_page'),
-    path('test/', views.test, name='test')
+    path('search/item/', views.search, name='search'),
+    path('test/mytest/', views.test, name='test')
 ]

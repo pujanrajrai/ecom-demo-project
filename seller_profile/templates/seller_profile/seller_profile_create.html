@@ -1,13 +1,19 @@
-{{ errors }}
-<form enctype="multipart/form-data" method="post" action="{% url 'seller_profile:seller_profile_create' %}">
-    {% csrf_token %}
-    first_name:<input type="text" name="first_name"><br>
-    last_name:<input type="text" name="last_name"><br>
-    mobile_number:<input type="number" minlength="9800000000" maxlength="9999999999" name="mobile_number"><br>
-    citizenship_number:<input type="text" name="citizenship_number"><br>
-    citizenship_front:<input type="file" name="citizenship_front" accept="image/*"><br>
-    citizenship_back:<input type="file" name="citizenship_back" accept="image/*"><br>
-    temp_add:<input type="text" name="temp_add"><br>
-    per_add:<input type="text" name="per_add"><br>
-    <input type="submit">
-</form>
+{% extends 'dashboard/base.html' %}
+{% block body %}
+    <div class="container">
+    <h1 class="alert alert-success">User created successfully</h1>
+        {{ errors }}
+        <form enctype="multipart/form-data" method="post" action="{% url 'seller_profile:seller_profile_create' %}">
+            {% csrf_token %}
+            first_name:<br><input type="text" name="first_name"><br>
+            last_name:<br><input type="text" name="last_name"><br>
+            mobile_number:<br><input type="number" minlength="10" min="9800000000" max="9999999999" name="mobile_number"><br>
+            citizenship_number:<br><input type="text" name="citizenship_number"><br>
+            citizenship_front:<br><input type="file" name="citizenship_front" accept="image/*"><br>
+            citizenship_back:<br><input type="file" name="citizenship_back" accept="image/*"><br>
+            temp_add:<br><input type="text" name="temp_add"><br>
+            per_add:<br><input type="text" name="per_add"><br><br>
+            <input type="submit" value="Create Profile" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}

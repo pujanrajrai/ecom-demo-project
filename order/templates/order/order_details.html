@@ -1,52 +1,73 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+{% extends 'customer/base.html' %}
+{% block body %}
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-</head>
-<body>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-<h2>My Order Details</h2>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">My Order Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Photo</th>
+                            <th>Product Price</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Photo</th>
+                            <th>Product Price</th>
+                            <th>Status</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for o in order %}
+                            <tr>
+                                <td>{{ o.products.product_name }}</td>
+                                <td><img src="{{ o.products.photo.url }}" width="200px" height="150px"></td>
+                                <td>{{ o.products.price }}</td>
+                                <td>
+                                    {% if o.is_delivered %}
+                                        Delivered
+                                    {% elif o.is_send and not o.is_delivered %}
+                                        On the Way
+                                    {% else %}
+                                        In review
+                                    {% endif %}
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+
 
 <table>
     <tr>
-        <th>Product Name</th>
-        <th>Product Photo</th>
-        <th>Product Price</th>
-        <th>Status</th>
-    </tr>
-    {% for o in order %}
-        <tr>
-            <td>{{ o.products.product_name }}</td>
-            <td><img src="{{ o.products.photo.url }}" width="200px" height="150px"></td>
-            <td>{{ o.products.price }}</td>
-            <td>
-                {% if o.is_delivered %}
-                    Delivered
-                    {% elif o.is_send and not o.is_delivered %}
-                     On the Way
-                    {% else %}
-                    In review
-                {% endif %}
 
-            </td>
-        </tr>
-    {% endfor %}
+    </tr>
+
 
 </table>
 {#<h1 align="right">Total:{{ total }}#}

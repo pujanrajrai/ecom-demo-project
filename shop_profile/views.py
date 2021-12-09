@@ -41,3 +41,4 @@ def show_shop_profile(request):
     my_shop_profile = ShopProfile.objects.filter(owner=request.user)
     context = {"shop_profile": my_shop_profile}
     return render(request, 'shop_profile/shop_profile_show.html', context)
+

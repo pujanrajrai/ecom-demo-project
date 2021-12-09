@@ -1,56 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+{% extends 'customer/base.html' %}
+{% block body %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: right">
+            <a href="{% url 'landing_page:landing_page' %}" class="btn btn-success mb-2">Add More item</a>
+        </h1>
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-</head>
-<body>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">My Cart</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Photo</th>
+                            <th>Product Price</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
 
-<h2>HTML Table</h2>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Photo</th>
+                            <th>Product Price</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for cart in cart_item %}
+                            <tr>
+                                <td>{{ cart.products.product_name }}</td>
+                                <td><img src="{{ cart.products.photo.url }}" width="200px" height="150px"></td>
+                                <td>{{ cart.products.price }}</td>
+                                <td>
+                                    <form method="post" action="{% url 'order:remove_from_cart' cart.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Remove From Cart</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-<table>
-    <tr>
-        <th>Product Name</th>
-        <th>Product Photo</th>
-        <th>Product Price</th>
-        <th>Action</th>
-    </tr>
-    {% for cart in cart_item %}
-        <tr>
-            <td>{{ cart.products.product_name }}</td>
-            <td><img src="{{ cart.products.photo.url }}" width="200px" height="150px"></td>
-            <td>{{ cart.products.price }}</td>
-            <td>
-                <form method="post" action="{% url 'order:remove_from_cart' cart.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Remove From Cart</button>
-                </form>
-            </td>
-        </tr>
-    {% endfor %}
+                        </tbody>
+                    </table>
+                    <h1 align="right">Total:{{ total }}
+                        <form method="post" action="{% url 'order:checkout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Check Out</button>
+                        </form>
+                    </h1>
 
-</table>
-<h1 align="right">Total:{{ total }}
-    <form method="post" action="{% url 'order:checkout' %}">
-        {% csrf_token %}
-        <button type="submit">Check Out</button>
-    </form>
-</h1>
+                </div>
+            </div>
+        </div>
 
-</body>
-</html>
+    </div>
+{% endblock %}
+

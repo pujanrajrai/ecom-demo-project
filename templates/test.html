@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block body %}
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: right">
+            <a href="{% url 'shop_profile:shop_profile_create' %}" class="btn btn-success mb-3">Add Shop</a>
+        </h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Shop Profile</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Shop Name</th>
+                            <th>Shop User Name</th>
+                            <th>Shop Category</th>
+                            <th>Shop Verification</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+
+                        <tr>
+                            <th>Shop Name</th>
+                            <th>Shop User Name</th>
+                            <th>Shop Category</th>
+                            <th>Shop Verification</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for profile in shop_profile %}
+                            <tr>
+                                <td>{{ profile.shop_name }}</td>
+                                <td>{{ profile.shop_user_name }}</td>
+                                <td>{{ profile.shop_category }}</td>
+                                <td>{{ profile.is_verified }}</td>
+                                <td><a href="{% url 'product:show_product' profile.shop_user_name %}">view Shop
+                                    Details</a></td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

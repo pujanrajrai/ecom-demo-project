@@ -1,0 +1,27 @@
+{% extends 'landing_page/base.html' %}
+
+{% block body %}
+    <div class="container m-5">
+        {% for product in search_result %}
+            <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+            <div class="row mb-5" style="border-bottom: 2px solid black">
+                <div class="col-6 col-md-4">
+                    <div class="card mb-4" style="width: 18rem;    box-shadow: 10px 10px 5px grey;">
+                        <img class="card-img-top image-resize2"
+                             src="{{ product.photo.url }}"
+                             alt="Card image cap" style="height: 300px; width: 200px; object-fit: cover">
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 " style="border-left: 2px solid black">
+                    <h1 class="mt-5">{{ product.product_name }}</h1>
+                    <h3>Rs. {{ product.price }}</h3>
+                    <h4>{{ product.brand_name }}</h4>
+                    <a href="#" class="btn btn-success">View Details</a>
+                </div>
+
+            </div>
+
+
+        {% endfor %}
+    </div>
+{% endblock %}
